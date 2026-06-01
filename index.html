@@ -8,29 +8,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #ec4899; /* Beautiful Pink Accent */
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
+            --bg-main: #0b0f19;
+            --bg-card: #151f32;
+            --accent-pink: #ec4899;
+            --accent-glow: rgba(236, 72, 153, 0.3);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-main);
+            color: var(--text-primary);
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: all 0.3s ease;
         }
 
+        /* Premium Template Header */
         header {
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(21, 31, 50, 0.75);
+            backdrop-filter: blur(12px);
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -45,165 +48,291 @@
         }
 
         .logo {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--accent-color);
+            color: var(--accent-pink);
             letter-spacing: 1px;
+            text-shadow: 0 0 10px var(--accent-glow);
         }
 
+        /* Hero Banner */
         .hero {
             max-width: 1000px;
-            margin: 120px auto 40px auto;
+            margin: 140px auto 40px auto;
             padding: 40px 20px;
             text-align: center;
         }
 
-        .profile-img-container {
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 20px auto;
+        .profile-wrapper {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px auto;
             border-radius: 50%;
-            border: 3px solid var(--accent-color);
+            border: 3px solid var(--accent-pink);
             display: flex;
             justify-content: center;
             align-items: center;
-            background: var(--card-bg);
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
+            background: var(--bg-card);
+            box-shadow: 0 0 25px var(--accent-glow);
         }
 
-        .profile-img-container i {
-            font-size: 4rem;
-            color: var(--accent-color);
+        .profile-wrapper i {
+            font-size: 3.5rem;
+            color: var(--accent-pink);
         }
 
         .hero h1 {
-            font-size: 2.5rem;
-            margin: 0 0 10px 0;
+            font-size: 2.6rem;
+            margin: 0 0 15px 0;
             font-weight: 700;
         }
 
         .hero h1 span {
-            color: var(--accent-color);
+            color: var(--accent-pink);
+            text-shadow: 0 0 10px var(--accent-glow);
         }
 
         .hero p {
-            color: var(--text-sub);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            line-height: 1.6;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 0 auto 35px auto;
+            line-height: 1.7;
         }
 
+        /* Main Section Styling */
+        .section-title {
+            text-align: center;
+            font-size: 1.75rem;
+            color: var(--text-primary);
+            margin: 40px 0 20px 0;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-pink);
+            margin: 8px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Skills Dashboard Segment */
+        .skills-container {
+            max-width: 600px;
+            margin: 0 auto 50px auto;
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .skill-box {
+            margin-bottom: 20px;
+        }
+
+        .skill-box:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .bar-wrapper {
+            background: rgba(255, 255, 255, 0.08);
+            height: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .bar-progress {
+            background: linear-gradient(90deg, var(--accent-pink), #f472b6);
+            height: 100%;
+            border-radius: 10px;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        /* Info Display Grid */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            gap: 25px;
             max-width: 1000px;
             margin: 0 auto;
-            padding: 0 20px 60px 20px;
+            padding: 0 20px 50px 20px;
         }
 
-        .card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s, border-color 0.3s;
+        .card-template {
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.3s ease;
         }
 
-        .card:hover {
+        .card-template:hover {
             transform: translateY(-5px);
-            border-color: var(--accent-color);
+            border-color: var(--accent-pink);
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.05);
         }
 
         .card-icon {
-            font-size: 2rem;
-            color: var(--accent-color);
+            font-size: 2.2rem;
+            color: var(--accent-pink);
             margin-bottom: 15px;
         }
 
-        .card h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.25rem;
+        .card-template h3 {
+            margin: 0 0 12px 0;
+            font-size: 1.3rem;
+            font-weight: 600;
         }
 
-        .card p {
-            color: var(--text-sub);
+        .card-template p {
+            color: var(--text-secondary);
             font-size: 0.95rem;
             line-height: 1.6;
             margin: 0;
         }
 
-        .btn-connect {
-            display: inline-block;
-            background: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
-            transition: 0.3s;
+        /* Premium Contact Button Area */
+        .contact-panel {
+            max-width: 600px;
+            margin: 0 auto 80px auto;
+            text-align: center;
+            padding: 0 20px;
         }
 
-        .btn-connect:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.55);
         }
 
         footer {
             text-align: center;
-            padding: 40px 20px;
-            color: var(--text-sub);
+            padding: 35px 20px;
+            color: var(--text-secondary);
             font-size: 0.85rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            background: #0b1120;
+            background: #060a12;
         }
     </style>
 </head>
 <body>
 
+    <!-- Header Navigation Layout -->
     <header>
         <div class="nav-container">
             <div class="logo">MEENAKSHI.</div>
-            <div style="font-size: 0.9rem; color: var(--text-sub);">Welcome to My Space</div>
+            <div style="font-size: 0.9rem; color: var(--text-secondary); font-weight: 500;">Personal Space</div>
         </div>
     </header>
 
+    <!-- Main Hero Presentation Panel -->
     <section class="hero">
-        <div class="profile-img-container">
-            <i class="fas fa-user-gradient"></i>
+        <div class="profile-wrapper">
+            <i class="fas fa-user-circle"></i>
         </div>
         <h1>Hi, I'm <span>Meenakshi</span> 👋</h1>
-        <p>Welcome to my official digital portfolio. I am exploring new horizons, learning creative skills, and building my journey one step at a time.</p>
-        <a href="https://github.com/Meenakshiliki" target="_blank" class="btn-connect">
-            <i class="fab fa-github" style="margin-right: 8px;"></i> Visit My GitHub
+        <p>Welcome to my premium digital space. I am learning creative modern skills, designing structural assets, and building a progressive future gateway.</p>
+    </section>
+
+    <!-- Skills Segment Area -->
+    <h2 class="section-title">My Skills</h2>
+    <section class="skills-container">
+        <!-- 20% C Programming Skill added precisely as requested -->
+        <div class="skill-box">
+            <div class="skill-info"><span>C Programming Language</span><span>20%</span></div>
+            <div class="bar-wrapper"><div class="bar-progress" data-width="20%"></div></div>
+        </div>
+        <div class="skill-box">
+            <div class="skill-info"><span>Web Designing Basics</span><span>65%</span></div>
+            <div class="bar-wrapper"><div class="bar-progress" data-width="65%"></div></div>
+        </div>
+        <div class="skill-box">
+            <div class="skill-info"><span>Creative Visual Arts</span><span>75%</span></div>
+            <div class="bar-wrapper"><div class="bar-progress" data-width="75%"></div></div>
+        </div>
+    </section>
+
+    <!-- Cards Layout Grid Platform -->
+    <h2 class="section-title">Academic Highlights</h2>
+    <section class="info-grid">
+        <div class="card-template">
+            <div class="card-icon"><i class="fas fa-book-reader"></i></div>
+            <h3>Education & Strategy</h3>
+            <p>Developing structural learning systems, understanding core concept foundations, and advancing technical knowledge curves efficiently.</p>
+        </div>
+
+        <div class="card-template">
+            <div class="card-icon"><i class="fas fa-star"></i></div>
+            <h3>Passions & Creativity</h3>
+            <p>Highly focused on digital graphics tracking, content optimization, interactive layouts design implementation, and creative arts.</p>
+        </div>
+
+        <div class="card-template">
+            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+            <h3>Future Development</h3>
+            <p>Building scalable modern workflows, managing complex problem-solving patterns, and aiming for dynamic tech milestones.</p>
+        </div>
+    </section>
+
+    <!-- Upgraded WhatsApp Button Redirect Module -->
+    <h2 class="section-title">Connect With Me</h2>
+    <section class="contact-panel">
+        <p style="color: var(--text-secondary); margin-bottom: 25px;">Natho direct ga contact avvalani anukunte kindha unna button click cheyandi!</p>
+        
+        <!-- Redirect WhatsApp Button point integration directly linking to Meenakshi's profile number -->
+        <a href="https://wa.me/917815872417?text=Hi%20Meenakshi,%20nee%20official%20portfolio%20website%20chusa!%20Outlook%20design%20super%20vundi." 
+           target="_blank" 
+           class="whatsapp-btn">
+            <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i>
+            Chat on WhatsApp
         </a>
     </section>
 
-    <section class="info-grid">
-        <div class="card">
-            <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
-            <h3>Education & Learning</h3>
-            <p>Focused on academic excellence, gaining core foundational knowledge, and continuously expanding skill sets through interactive modern studies.</p>
-        </div>
-
-        <div class="card">
-            <div class="card-icon"><i class="fas fa-heart"></i></div>
-            <h3>Interests & Passions</h3>
-            <p>Passionate about creative arts, exploring new digital technologies, logical learning, and developing a well-rounded set of modern real-world skills.</p>
-        </div>
-
-        <div class="card">
-            <div class="card-icon"><i class="fas fa-rocket"></i></div>
-            <h3>Future Goals</h3>
-            <p>Aiming to build a bright career, work on impactful personal projects, and utilize technological innovations to create meaningful differences.</p>
-        </div>
-    </section>
-
+    <!-- Footer Copyright Block -->
     <footer>
-        &copy; 2026 Meenakshi | Designed with Love & Hosted on GitHub
+        &copy; 2026 Meenakshi | Designed & Hosted via GitHub Repositories
     </footer>
 
+    <!-- Skill Progress Loading Engine Script -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const progressElements = document.querySelectorAll('.bar-progress');
+            setTimeout(() => {
+                progressElements.forEach(element => {
+                    element.style.width = element.getAttribute('data-width');
+                });
+            }, 250);
+        });
+    </script>
 </body>
-</html>
+        </html>
